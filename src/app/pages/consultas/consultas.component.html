@@ -1,0 +1,88 @@
+<div id="cuerpo-fondo">
+  <div id="busqueda-input">
+    <form #articuloForm="ngForm" class="needs-validation" novalidate>
+      <!--(ngSubmit)="addArticulo(articuloForm)"-->
+      <div class="form-row">
+        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="articuloService.selectedArticulo._id">
+        <div class="col-md-6 mb-3">
+          <label for="validationTooltip01">Título</label>
+          <input type="text" name="name" #name="ngModel" [(ngModel)]="articuloService.selectedArticulo.name" class="form-control" id="validationTooltip01" required>
+          <div class="valid-tooltip">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationTooltip02">Autor(es)</label>
+          <input type="text" name="autor" #autor="ngModel" [(ngModel)]="articuloService.selectedArticulo.autor" class="form-control" id="validationTooltip02" required>
+          <div class="valid-tooltip">
+            Looks good!
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="validationTooltip03">Album</label>
+          <input type="text" name="album" #album="ngModel" [(ngModel)]="articuloService.selectedArticulo.album" class="form-control" id="validationTooltip03" required>
+          <div class="invalid-tooltip">
+            Please provide a valid id.
+          </div>
+        </div>
+        <!--
+        <div class="col-md-3 mb-3">
+          <label for="validationTooltip04">Categoría</label>
+          <input type="text" class="form-control" id="validationTooltip04" required>
+          <div class="invalid-tooltip">
+            Please provide a valid category.
+          </div>
+          
+          <select class="custom-select" id="validationTooltip04" required>
+            <option selected disabled value="">Choose...</option>
+            <option>Rock</option>
+            <option>Clásico</option>
+            <option>Pop</option>
+            <option>Banda</option>
+          </select>
+          <div class="invalid-tooltip">
+            Please select a valid category.
+          </div>
+          
+        </div> -->
+        <div class="col-md-3 mb-3">
+          <label for="validationTooltip05">Año de publicación</label>
+          <input type="number" name="year" #year="ngModel" [(ngModel)]="articuloService.selectedArticulo.year" inputmode="numeric" class="form-control" id="validationTooltip05" required>
+          <div class="invalid-tooltip">
+            Please provide a valid year.
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit" >Buscar</button>
+      <button class="btn btn-primary" type="submit" style="margin-left: 20px;">Limpiar</button>
+      <!--(click)="resetForm(articuloForm)"-->
+    </form>
+  </div>
+
+  <div id="contenido">
+    <table class="table table-bordered" border="1">
+      <thead class="thead-dark">
+        <th>Nombre</th>
+        <th>Álbum</th>
+        <th>Autor</th>
+        <th>Año</th>
+        <th style="text-align: center;">Opciones</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let articulo of articuloService.articulos">
+          <td>{{ articulo.name }}</td>
+          <td>{{ articulo.album }}</td>
+          <td>{{ articulo.autor }}</td>
+          <td>{{ articulo.year }}</td>
+          <td id="btn-opciones">
+            <a (click)="viewArticulo(articulo)" style="cursor:pointer;">
+              <i class="bi bi-eye-fill"> View</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

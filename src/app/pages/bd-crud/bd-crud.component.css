@@ -1,0 +1,85 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Praise&display=swap');
+
+body{
+    margin: 0px;
+    padding: 0px;
+    /*background-color: #E5ECEA;*/
+}
+
+#cuerpo-fondo {
+    /*background-color: #E5ECEA;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    margin-top: 55px;
+
+}
+
+.table td {
+    border-color: rgb(106, 107, 121);
+}
+
+#title{
+    font-family: 'Praise';
+    font-size: 70px;
+    text-align: center;
+}
+
+#creator{
+    font-size: 20px;
+    text-align: center;
+}
+
+/*header{
+    padding: 25px;
+    background: #333334;
+    color: #FFFFFF;
+}*/
+
+#btn{
+    margin: 10px;
+}
+
+#contenido{
+    /*background-color: #E5ECEA;*/
+    margin-top: 10px;
+    font-family: 'Lato';
+    background-attachment: fixed;
+    padding: 2% 4%;
+    margin-left: 10%;
+    margin-right: 10%;
+    box-sizing: border-box;
+}
+
+#btn-opciones {
+    width: 25%;
+    text-align: center;
+}
+
+#busqueda-input form {
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {  }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { }
