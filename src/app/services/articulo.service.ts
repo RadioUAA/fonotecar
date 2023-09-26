@@ -18,6 +18,8 @@ export class ArticuloService {
 
   articulos: Articulo[] = [];
 
+  uri : string = "mongodb+srv://BDradio:<password>@cluster0.ts8l218.mongodb.net/?retryWrites=true&w=majority";
+
   constructor(private http: HttpClient) {
     this.selectedArticulo = new Articulo ();
   }

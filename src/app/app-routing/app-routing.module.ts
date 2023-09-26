@@ -11,7 +11,7 @@ const routes: Routes = [
 { path: "Login", component: LogInComponent, pathMatch: "full" },
 { path: "Consultas", component: ConsultasComponent, pathMatch: "full" },
 { path: "BaseDatos", component: BdCrudComponent, pathMatch: "full", canActivate: [AuthGuard] },
-{ path: "**",  pathMatch: "full", redirectTo: "Login" }
+{ path: "**",  pathMatch: "full", redirectTo: "Consultas" }
 
 ];
 
