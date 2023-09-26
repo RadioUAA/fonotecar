@@ -1,6 +1,6 @@
 
 .contenedor {
-  background-image: url("/assets/material/fondo.png");
+  background-image: url("assets/material/fondo.png");
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
