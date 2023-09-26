@@ -52,6 +52,7 @@ export class LogInComponent {
       this.router.navigate(['/BaseDatos']);
     } else {
       this.router.navigate(['/Login']);
+      $('.toast').toast({ delay: 5000 });
       $('.toast').toast('show');
         this.authservice.isAuthenticable = false;
 
