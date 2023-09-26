@@ -27,8 +27,9 @@ export class AppComponent {
     }
   };
   headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'api-key' : 'mg6VdO8ZjsklYe5sUjgea4ZcDfS1IoRwwvn4r7LF0GsqQZW6tpbHxMVoWPhr38Yr'
+    'Content-Type': 'application/ejson',
+    'Accept': 'application/json',
+    'apiKey' : 'mg6VdO8ZjsklYe5sUjgea4ZcDfS1IoRwwvn4r7LF0GsqQZW6tpbHxMVoWPhr38Yr'
   });
 
   constructor(
