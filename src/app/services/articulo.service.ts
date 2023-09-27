@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Articulo } from '../models/articulo';
 
 @Injectable({
@@ -10,11 +10,21 @@ export class ArticuloService {
 
   selectedArticulo: Articulo = {
     _id: "",
-    name: "",
+    titulo: "",
     album: "",
     autor: "",
-    year: ""
+    compositor: "",
+    anio: "",
+    genero: "",
+    formato: "",
+    ubicacion: ""
   };
+
+  headers = new HttpHeaders({
+    'Content-Type': 'application/ejson',
+    'Accept': 'application/json',
+    'apiKey' : 'mg6VdO8ZjsklYe5sUjgea4ZcDfS1IoRwwvn4r7LF0GsqQZW6tpbHxMVoWPhr38Yr'
+  });
 
   articulos: Articulo[] = [];
 

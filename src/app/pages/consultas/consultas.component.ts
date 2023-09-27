@@ -11,33 +11,25 @@ import { Articulo } from 'src/app/models/articulo';
   providers: [ArticuloService]
 })
 export class ConsultasComponent {
+  inputArticulo: Articulo = {
+    _id: "",
+    titulo: "",
+    album: "",
+    autor: "",
+    compositor: "",
+    anio: "",
+    genero: "",
+    formato: "",
+    ubicacion: ""
+  };
 
-  constructor (public router: Router, public articuloService: ArticuloService){ }
+  constructor (public router: Router, public articuloService: ArticuloService){
+    this.inputArticulo = new Articulo();
+  }
 
   ngOnInit(){  
     this.getArticulos();
   }
-
-  /*
-  addArticulo(form: NgForm){
-    if(form.value._id){
-      this.articuloService.putArticulo(form.value)
-      .subscribe(res => {
-        console.log(res + "Actualizado exitosamente!");
-        this.resetForm(form);
-        this.getArticulos();
-      });
-    } else {
-      this.articuloService.postArticulo(form.value)
-      .subscribe(res => {
-      console.log(res);
-      this.resetForm(form);
-      this.getArticulos();
-      //Añadir un toast para informar que se ingresó un articulo
-    });
-    }
-  }
-  */
 
   getArticulos(){
     this.articuloService.getArticulos()
@@ -47,29 +39,14 @@ export class ConsultasComponent {
     });
   }
 
-  editArticulo(articulo: Articulo){
-    this.articuloService.selectedArticulo = articulo;
-  }
-
   viewArticulo(articulo: Articulo){
-    
-  }
-
-  deleteArticulo(_id: String){
-    if(confirm('Are you sure you want to delete it?')){
-      this.articuloService.deleteArticulo(_id)
-      .subscribe(res => {
-        console.log(res);
-        this.getArticulos();
-        //Poner toast de articulo eliminado...
-      });
-    }
+    this.inputArticulo = articulo;
   }
 
   resetForm(form?: NgForm){
     if(form){
-      form.reset();
-      this.articuloService.selectedArticulo = new Articulo();
+      //form.reset();
+      this.inputArticulo = new Articulo();
     }
   }
 

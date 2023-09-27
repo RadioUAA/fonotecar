@@ -12,9 +12,20 @@ import { Articulo } from 'src/app/models/articulo';
   providers: [ArticuloService]
 })
 export class BdCrudComponent {
+  inputArticulo: Articulo = {
+    _id: "",
+    titulo: "",
+    album: "",
+    autor: "",
+    compositor: "",
+    anio: "",
+    genero: "",
+    formato: "",
+    ubicacion: ""
+  };
 
   constructor (private authservice: AuthserviceService, public router: Router, public articuloService: ArticuloService){
-    
+    this.inputArticulo = new Articulo();
   }
   ngOnInit(){
     if (!this.authservice.isAuthenticable){
@@ -30,7 +41,7 @@ export class BdCrudComponent {
         console.log(res + "Actualizado exitosamente!");
         this.resetForm(form);
         this.getArticulos();
-      });
+      }).unsubscribe;
     } else {
       this.articuloService.postArticulo(form.value)
       .subscribe(res => {
@@ -38,7 +49,7 @@ export class BdCrudComponent {
       this.resetForm(form);
       this.getArticulos();
       //Añadir un toast para informar que se ingresó un articulo
-    });
+    }).unsubscribe;
     }
   }
 
@@ -51,7 +62,8 @@ export class BdCrudComponent {
   }
 
   editArticulo(articulo: Articulo){
-    this.articuloService.selectedArticulo = articulo;
+    //this.articuloService.selectedArticulo = articulo;
+    this.inputArticulo = articulo;
   }
 
   deleteArticulo(_id: String){
@@ -67,8 +79,9 @@ export class BdCrudComponent {
 
   resetForm(form?: NgForm){
     if(form){
-      form.reset();
-      this.articuloService.selectedArticulo = new Articulo();
+      //form.reset();
+      //this.articuloService.selectedArticulo = new Articulo();
+      this.inputArticulo = new Articulo();
     }
   }
 }

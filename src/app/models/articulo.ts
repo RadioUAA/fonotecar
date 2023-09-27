@@ -1,28 +1,33 @@
 export class Articulo {
-    /*
-    _id: string = "";
-    name: string = "";
-    album: string = "";
-    autor: string = "";
-    year: string = "";
-    */
    constructor(
         _id = '',
-        name = '',
+        titulo = '',
         album = '',
         autor = '',
-        year = ''
+        compositor = '',
+        anio = '',
+        genero = '',
+        formato = '',
+        ubicacion = ''
         ) {
             this._id = _id;
-            this.name = name;
+            this.titulo = titulo;
             this.album = album;
             this.autor = autor;
-            this.year = year;
+            this.compositor = compositor;
+            this.anio = anio;
+            this.genero = genero;
+            this.formato = formato;
+            this.ubicacion = ubicacion;
    }
 
     _id: string;
-    name: string;
+    titulo: string;
     album: string;
     autor: string;
-    year: string;
+    compositor: string;
+    anio: string;
+    genero: string;
+    formato: string;
+    ubicacion: string;
 }
