@@ -35,14 +35,12 @@ export class BdCrudComponent {
   }
 
   addArticulo(form: NgForm){
-    if(form.value._id){
+          //if(form.value._id){
       this.articuloService.putArticulo(form.value)
-      .subscribe(res => {
-        console.log(res + "Actualizado exitosamente!");
+        console.log("Actualizado exitosamente!");
         this.resetForm(form);
         this.getArticulos();
-      }).unsubscribe;
-    } else {
+    /*} else {
       this.articuloService.postArticulo(form.value)
       .subscribe(res => {
       console.log(res);
@@ -50,7 +48,7 @@ export class BdCrudComponent {
       this.getArticulos();
       //Añadir un toast para informar que se ingresó un articulo
     }).unsubscribe;
-    }
+    }*/
   }
 
   getArticulos(){
