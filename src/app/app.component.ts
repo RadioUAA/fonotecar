@@ -26,11 +26,15 @@ export class AppComponent {
       Ubicacion : "Lagos de moreno"
     }
   };
-  headers = new HttpHeaders({
-    'Content-Type': 'application/ejson',
-    'Accept': 'application/json',
-    'apiKey' : 'mg6VdO8ZjsklYe5sUjgea4ZcDfS1IoRwwvn4r7LF0GsqQZW6tpbHxMVoWPhr38Yr'
-  });
+
+  bodyToken = {
+    "username": "radioUAA2023@outlook.com",
+    "password": "Radio2023UAAmongo"
+  };
+  
+  headersT = new HttpHeaders()
+  .set('Content-Type', 'application/json');
+  
 
   constructor(
     public navbarService: NavbarService,
@@ -42,6 +46,9 @@ export class AppComponent {
     return this.navbarService.isNavbarVisible;
   
   }
+
+
+
   logout() {
     // Elimina los elementos relacionados con la autenticación en el almacenamiento local
     localStorage.removeItem('seguridad1');
@@ -51,13 +58,29 @@ export class AppComponent {
     // Redirige al usuario a la página de inicio de sesión o a donde desees
     this.router.navigate(['/Login']);
 
-    this.http.post('https://us-east-1.aws.data.mongodb-api.com/app/fonoteca-dahhj/endpoint/data/v1/action/insertOne' , this.bodyInsert, { headers: this.headers }).subscribe(
-      response => {
-          console.log(response)
+    this.http.post("https://us-east-2.aws.realm.mongodb.com/api/client/v2.0/app/data-cvcha/auth/providers/local-userpass/login", this.bodyToken, { headers: this.headersT }).subscribe(
+      (response: any) => {
+        // Maneja la respuesta aquí
+        var headers = new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('Access-Control-Request-Headers', '*')
+        .set('Authorization', 'Bearer ' + response.access_token);
+        this.http.post('https://us-east-2.aws.data.mongodb-api.com/app/data-cvcha/endpoint/data/v1/action/insertOne' , this.bodyInsert, { headers: headers }).subscribe(
+        response => {
+            console.log(response)
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+        console.log(response);
       },
-      error => {
-        console.error('Error:', error);
+      (error) => {
+        // Maneja los errores aquí
+        console.error(error);
       }
     );
+
+    
   }
 }
