@@ -32,11 +32,11 @@ export class ConsultasComponent {
   }
 
   getArticulos(){
-    this.articuloService.getArticulos()
-    .subscribe(res => {
+    this.articuloService.getArticulos();
+    /*.subscribe(res => {
       this.articuloService.articulos = res as Articulo[];
       console.log(res);
-    });
+    });*/
   }
 
   viewArticulo(articulo: Articulo){

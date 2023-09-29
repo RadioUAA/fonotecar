@@ -35,28 +35,29 @@ export class BdCrudComponent {
   }
 
   addArticulo(form: NgForm){
-          //if(form.value._id){
-      this.articuloService.putArticulo(form.value)
+    if(form.value._id){
+      if(confirm('Are you sure you want to edit it?')){
+        this.articuloService.putArticulo(form.value);
         console.log("Actualizado exitosamente!");
         this.resetForm(form);
+        form.reset();
         this.getArticulos();
-    /*} else {
-      this.articuloService.postArticulo(form.value)
-      .subscribe(res => {
-      console.log(res);
+      }
+    } else {
+      this.articuloService.postArticulo(form.value);
+      console.log("Ingreso exitoso!");
       this.resetForm(form);
       this.getArticulos();
       //Añadir un toast para informar que se ingresó un articulo
-    }).unsubscribe;
-    }*/
+    }
   }
 
   getArticulos(){
-    this.articuloService.getArticulos()
-    .subscribe(res => {
-      this.articuloService.articulos = res as Articulo[];
-      console.log(res);
-    });
+    this.articuloService.getArticulos();
+    //.subscribe(res => {
+      //this.articuloService.articulos = res as Articulo[];
+      //console.log(res);
+    //});
   }
 
   editArticulo(articulo: Articulo){
@@ -66,12 +67,15 @@ export class BdCrudComponent {
 
   deleteArticulo(_id: String){
     if(confirm('Are you sure you want to delete it?')){
-      this.articuloService.deleteArticulo(_id)
+      this.articuloService.deleteArticulo(_id);
+      this.getArticulos();
+      /*
       .subscribe(res => {
         console.log(res);
         this.getArticulos();
         //Poner toast de articulo eliminado...
       });
+      */
     }
   }
 

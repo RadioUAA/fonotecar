@@ -37,7 +37,7 @@
           
           <div class="col-md-3 mb-3">
             <label for="validationTooltip05">Año de publicación</label>
-            <input type="number" name="year" #year="ngModel" [(ngModel)]="inputArticulo.anio" inputmode="numeric" class="form-control" id="validationTooltip05" required>
+            <input type="number" name="anio" #year="ngModel" [(ngModel)]="inputArticulo.anio" class="form-control" inputmode="numeric" id="validationTooltip05" required>
             <div class="invalid-tooltip">
               Please provide a valid year.
             </div>
@@ -87,20 +87,20 @@
           <th style="text-align: center;">Opciones</th>
         </thead>
         <tbody>
-          <tr *ngFor="let articulo of articuloService.articulos">
-            <td>{{ articulo.titulo }}</td>
-            <td>{{ articulo.album }}</td>
-            <td>{{ articulo.autor }}</td>
-            <td>{{ articulo.compositor }}</td>
-            <td>{{ articulo.anio }}</td>
-            <td>{{ articulo.genero }}</td>
-            <td>{{ articulo.formato }}</td>
-            <td>{{ articulo.ubicacion }}</td>
+          <tr *ngFor="let item of articuloService.articulos.documents">
+            <td>{{ item.titulo }}</td>
+            <td>{{ item.album }}</td>
+            <td>{{ item.autor }}</td>
+            <td>{{ item.compositor }}</td>
+            <td>{{ item.anio }}</td>
+            <td>{{ item.genero }}</td>
+            <td>{{ item.formato }}</td>
+            <td>{{ item.ubicacion }}</td>
             <td id="btn-opciones">
-              <a (click)="editArticulo(articulo)" style="cursor:pointer;">
+              <a (click)="editArticulo(item)" style="cursor:pointer;">
                 <i class="bi bi-pencil-square">Edit</i>
               </a>
-              <a (click)="deleteArticulo(articulo._id)" style="cursor:pointer; margin-left: 10px;">
+              <a (click)="deleteArticulo(item._id)" style="cursor:pointer; margin-left: 10px;">
                 <i class="bi bi-trash3">Delete</i>
               </a>
             </td>
