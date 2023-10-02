@@ -41,14 +41,23 @@ export class BdCrudComponent {
         console.log("Actualizado exitosamente!");
         this.resetForm(form);
         form.reset();
-        this.getArticulos();
       }
     } else {
-      this.articuloService.postArticulo(form.value);
-      console.log("Ingreso exitoso!");
-      this.resetForm(form);
-      this.getArticulos();
-      //Añadir un toast para informar que se ingresó un articulo
+      if(form.value.titulo != "" 
+        && form.value.album != ""
+        && form.value.autor != ""
+        && form.value.compositor != ""
+        && form.value.anio != ""
+        && form.value.genero != ""
+        && form.value.formato != ""
+        && form.value.ubicacion != ""
+        ){
+        this.articuloService.postArticulo(form.value);
+        console.log("Ingreso exitoso!");
+        this.resetForm(form);
+        //Añadir un toast para informar que se ingresó un articulo
+      }
+      
     }
   }
 
@@ -68,7 +77,6 @@ export class BdCrudComponent {
   deleteArticulo(_id: String){
     if(confirm('Are you sure you want to delete it?')){
       this.articuloService.deleteArticulo(_id);
-      this.getArticulos();
       /*
       .subscribe(res => {
         console.log(res);

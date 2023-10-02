@@ -30,7 +30,7 @@ export class ArticuloService {
   headersT = new HttpHeaders()
     .set('Content-Type', 'application/json');
 
-  //articulos: Articulo[] = [];
+  
   articulos: any;
   arrayArticulos: any;
 
@@ -111,6 +111,7 @@ export class ArticuloService {
         this.http.post('https://us-east-2.aws.data.mongodb-api.com/app/data-cvcha/endpoint/data/v1/action/updateOne', bodyInsert, { headers: headers }).subscribe(
           response => {
             console.log(response);
+            this.getArticulos();
           },
           error => {
             console.error('Error:', error);
@@ -154,6 +155,7 @@ export class ArticuloService {
         this.http.post('https://us-east-2.aws.data.mongodb-api.com/app/data-cvcha/endpoint/data/v1/action/insertOne', bodyInsert, { headers: headers }).subscribe(
           response => {
             console.log(response);
+            this.getArticulos();
           },
           error => {
             console.error('Error:', error);
@@ -188,6 +190,7 @@ export class ArticuloService {
         this.http.post('https://us-east-2.aws.data.mongodb-api.com/app/data-cvcha/endpoint/data/v1/action/deleteOne', bodyInsert, { headers: headers }).subscribe(
           response => {
             console.log(response);
+            this.getArticulos();
           },
           error => {
             console.error('Error:', error);
