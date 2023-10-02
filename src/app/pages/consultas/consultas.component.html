@@ -1,7 +1,6 @@
 <div id="cuerpo-fondo">
   <div id="busqueda-input">
-    <form #articuloForm="ngForm" class="needs-validation" novalidate>
-      <!--(ngSubmit)="addArticulo(articuloForm)"-->
+    <!--<form #articuloForm="ngForm" class="needs-validation" novalidate>-->
       <!--
       <div class="form-row">
         <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="inputArticulo._id">
@@ -44,40 +43,43 @@
       </div>
       -->
 
-      <div class="form-row">
+      <div class="row">
         <div class="col-md-6 mb-3">
           <label for="validationTooltip01">Búsqueda general</label>
-          <input type="text" name="name" #name="ngModel" [(ngModel)]="inputArticulo.titulo" class="form-control"
-            placeholder="Busque por título, álbum, autor, compositor, formato o ubicación" id="validationTooltip01" required>
-          <div class="valid-tooltip">
-            Looks good!
+          <div class="input-group mb-3">
+            <input [(ngModel)]="bgeneral" type="text" class="form-control" placeholder="Busque por título, álbum, autor, compositor, formato o ubicación" aria-label="General" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchGeneral()">Buscar</button>
           </div>
+          <!--<input type="text" name="name" #name="ngModel" [(ngModel)]="busqueda1" class="form-control"
+            placeholder="Busque por título, álbum, autor, compositor, formato o ubicación" id="validationTooltip01" required>-->
         </div>
         <div class="col-md-6 mb-3">
           <label for="validationTooltip02">Buscar por categoría</label>
-          <input type="text" name="autor" #autor="ngModel" [(ngModel)]="inputArticulo.genero" class="form-control"
-            placeholder="Ingrese una categoría" id="validationTooltip02" required>
-          <div class="valid-tooltip">
-            Looks good!
+          <div class="input-group mb-3">
+            <input [(ngModel)]="bcategory" type="text" class="form-control" placeholder="Ingrese una categoría" aria-label="Categoria" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchCategory()">Buscar</button>
           </div>
+          <!--<input type="text" name="autor" #autor="ngModel" [(ngModel)]="inputArticulo.genero" class="form-control"
+            placeholder="Ingrese una categoría" id="validationTooltip02" required>-->
         </div>
       </div>
 
-      <div class="form-row">
+      <div class="row">
         <div class="col-md-6 mb-3">
           <label for="validationTooltip01">Buscar por año</label>
-          <input type="text" name="name" #name="ngModel" [(ngModel)]="inputArticulo.anio" class="form-control"
-          placeholder="Ingrese un año" id="validationTooltip03" required>
-          <div class="valid-tooltip">
-            Looks good!
+          <!--<input type="text" name="name" #name="ngModel" [(ngModel)]="inputArticulo.anio" class="form-control"
+          placeholder="Ingrese un año" id="validationTooltip03" required>-->
+          <div class="input-group mb-3">
+            <input [(ngModel)]="byear" type="text" class="form-control" placeholder="Ingrese un año" aria-label="Anio" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchYear()">Buscar</button>
           </div>
         </div>
       </div>
 
-      <button class="btn btn-primary" type="submit">Buscar</button>
+      <!--<button class="btn btn-primary" type="submit">Buscar</button>-->
       <button class="btn btn-primary" type="submit" style="margin-left: 20px;"
-        (click)="resetForm(articuloForm)">Limpiar</button>
-    </form>
+        (click)="reset()">Limpiar</button>
+    <!--</form>-->
   </div>
 
   <div id="contenido">

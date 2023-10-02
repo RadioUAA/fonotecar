@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Articulo } from '../models/articulo';
+import { Int32 } from 'mongodb';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,6 @@ export class ArticuloService {
   //Obtiene todos los articulos
   getArticulos() {
     this.articulos = "";
-    //return this.http.get(this.URL_API);
     this.http.post("https://us-east-2.aws.realm.mongodb.com/api/client/v2.0/app/data-cvcha/auth/providers/local-userpass/login", this.bodyToken, { headers: this.headersT }).subscribe(
       (response: any) => {
         // Maneja la respuesta aquí
@@ -62,7 +62,6 @@ export class ArticuloService {
             this.arrayArticulos = JSON.stringify(response);
             //console.log(this.arrayArticulos);
             this.articulos = JSON.parse(this.arrayArticulos);
-
             //console.log(this.articulos.documents.length);
             //console.log(this.articulos.documents[0].titulo);
           },
@@ -203,6 +202,7 @@ export class ArticuloService {
     );
   }
 
+  //Busca articulos por titulo, album, autor, compositor, formato y ubicacion
   busquedaGeneral(consulta: String){
     this.http.post("https://us-east-2.aws.realm.mongodb.com/api/client/v2.0/app/data-cvcha/auth/providers/local-userpass/login", this.bodyToken, { headers: this.headersT }).subscribe(
       (response: any) => {
@@ -218,12 +218,12 @@ export class ArticuloService {
           collection: "Titulo",
           filter: { 
             $or: [
-              { titulo: "/consulta/" },
-              { album: "/consulta/" },
-              { autor: "/consulta/" },
-              { compositor: "/consulta/" },
-              { formato: "/consulta/" },
-              { ubicacion: "/consulta/" }
+              { titulo: { $regex: consulta, $options: 'i' } },
+              { album: { $regex: consulta, $options: 'i' } },
+              { autor: { $regex: consulta, $options: 'i' } },
+              { compositor: { $regex: consulta, $options: 'i' } },
+              { formato: { $regex: consulta, $options: 'i' } },
+              { ubicacion: { $regex: consulta, $options: 'i' } }
             ]
           },
           sort: { completedAt: 1 }
@@ -232,6 +232,11 @@ export class ArticuloService {
         this.http.post('https://us-east-2.aws.data.mongodb-api.com/app/data-cvcha/endpoint/data/v1/action/find', bodyInsert, { headers: headers }).subscribe(
           response => {
             console.log(response);
+            this.arrayArticulos = JSON.stringify(response);
+            console.log(this.arrayArticulos);
+            this.articulos = JSON.parse(this.arrayArticulos);
+            console.log(this.articulos.documents.length);
+            //console.log(this.articulos.documents[0].titulo);
           },
           error => {
             console.error('Error:', error);
@@ -246,12 +251,84 @@ export class ArticuloService {
     );
   }
 
-  buscarCategoria(){
+  //Busca articulos por categoria/genero
+  buscarCategoria(consulta: String){
+    this.http.post("https://us-east-2.aws.realm.mongodb.com/api/client/v2.0/app/data-cvcha/auth/providers/local-userpass/login", this.bodyToken, { headers: this.headersT }).subscribe(
+      (response: any) => {
+        // Maneja la respuesta aquí
+        var headers = new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Access-Control-Request-Headers', '*')
+          .set('Authorization', 'Bearer ' + response.access_token);
+        
+        var bodyInsert = {
+          dataSource: "Cluster0",
+          database: "Fonoteca",
+          collection: "Titulo",
+          filter: { genero: { $regex: consulta, $options: 'i' } },
+          sort: { completedAt: 1 }
+        };
 
+        this.http.post('https://us-east-2.aws.data.mongodb-api.com/app/data-cvcha/endpoint/data/v1/action/find', bodyInsert, { headers: headers }).subscribe(
+          response => {
+            console.log(response);
+            this.arrayArticulos = JSON.stringify(response);
+            console.log(this.arrayArticulos);
+            this.articulos = JSON.parse(this.arrayArticulos);
+            console.log(this.articulos.documents.length);
+          },
+          error => {
+            console.error('Error:', error);
+          }
+        );
+        console.log(response);
+      },
+      (error) => {
+        // Maneja los errores aquí
+        console.error(error);
+      }
+    );
   }
 
-  buscarAnios(){
+  //Busca articulos por anio
+  buscarAnios(consulta: String){
+    //El valor del input para buscar por año se transforma a formato numérico para coincidir con el campo en mongoDB
+    var anioConsulta: any = Number(consulta);
+    this.http.post("https://us-east-2.aws.realm.mongodb.com/api/client/v2.0/app/data-cvcha/auth/providers/local-userpass/login", this.bodyToken, { headers: this.headersT }).subscribe(
+      (response: any) => {
+        // Maneja la respuesta aquí
+        var headers = new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Access-Control-Request-Headers', '*')
+          .set('Authorization', 'Bearer ' + response.access_token);
+        
+        var bodyInsert = {
+          dataSource: "Cluster0",
+          database: "Fonoteca",
+          collection: "Titulo",
+          filter: { anio: anioConsulta },
+          sort: { completedAt: 1 }
+        };
 
+        this.http.post('https://us-east-2.aws.data.mongodb-api.com/app/data-cvcha/endpoint/data/v1/action/find', bodyInsert, { headers: headers }).subscribe(
+          response => {
+            console.log(response);
+            this.arrayArticulos = JSON.stringify(response);
+            console.log(this.arrayArticulos);
+            this.articulos = JSON.parse(this.arrayArticulos);
+            console.log(this.articulos.documents.length);
+          },
+          error => {
+            console.error('Error:', error);
+          }
+        );
+        console.log(response);
+      },
+      (error) => {
+        // Maneja los errores aquí
+        console.error(error);
+      }
+    );
   }
 
 }

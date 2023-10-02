@@ -65,7 +65,7 @@ body{
     text-align: center;
 }
 
-#busqueda-input form {
+#busqueda-input {
     margin-top: 50px;
     margin-left: 50px;
     margin-right: 50px;
