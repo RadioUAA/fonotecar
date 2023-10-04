@@ -1,3 +1,8 @@
 body {
     background-color: #E5ECEA;
 }
+
+.ngx-pagination .current  {
+    background-color: rgb(111, 168, 77)!important;
+  }
+  

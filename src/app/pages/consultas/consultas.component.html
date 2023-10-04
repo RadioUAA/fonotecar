@@ -83,6 +83,7 @@
   </div>
 
   <div id="contenido">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
     <table class="table table-bordered" border="1">
       <thead class="thead-dark">
         <th>Título</th>
@@ -97,7 +98,7 @@
       </thead>
       <tbody>
         <!--<tr *ngFor="let articulo of articuloService.articulos">-->
-        <tr *ngFor="let articulo of articuloService.articulos.documents">
+        <tr *ngFor="let articulo of articuloService.articulos.documents | paginate: { itemsPerPage: a, currentPage: p }">
           <td>{{ articulo.titulo }}</td>
           <td>{{ articulo.album }}</td>
           <td>{{ articulo.autor }}</td>
@@ -114,6 +115,6 @@
         </tr>
       </tbody>
     </table>
-
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>

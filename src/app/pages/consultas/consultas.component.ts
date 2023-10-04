@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { ArticuloService } from '../../services/articulo.service';
 import { Articulo } from 'src/app/models/articulo';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-consultas',
@@ -21,13 +22,20 @@ export class ConsultasComponent {
     formato: "",
     ubicacion: ""
   };
-
+  p: any;
   bgeneral: String = "";
   bcategory: String = "";
   byear: String = "";
+  a:number = 5;
+
 
   constructor (public router: Router, public articuloService: ArticuloService){
     this.inputArticulo = new Articulo();
+    setInterval(() =>{
+      this.a++;
+      console.log("Hola")
+    }, 3000);
+    
   }
 
   ngOnInit(){  
@@ -43,17 +51,13 @@ export class ConsultasComponent {
     this.inputArticulo = articulo;
     //PARTE DONDE SE PUEDE METER EL MODAL PARA MOSTRAR EL ARTICULO SELECCIONADO
     /************************************************************************/
-    confirm(
-      ">>>>> Artículo seleccionado <<<<<\n"
-      +"Título: "+articulo.titulo+"\n"
-      +"Álbum: "+articulo.album+"\n"
-      +"Autor: "+articulo.autor+"\n"
-      +"Compositor: "+articulo.compositor+"\n"
-      +"Año: "+articulo.anio+"\n"
-      +"Género: "+articulo.genero+"\n"
-      +"Formato: "+articulo.formato+"\n"
-      +"Ubicación: "+articulo.ubicacion+"\n"
-      );
+    Swal.fire({
+      icon: 'info',
+      title: articulo.titulo + " | " + articulo.autor,
+      html: "Album: " + articulo.album + ", " + articulo.anio + "<br>" + "Género: "+ articulo.genero + "<br>" + "Compositor: "+ articulo.compositor,
+      confirmButtonText: "Aceptar",
+      footer: "Ubicaion: " + articulo.ubicacion + ", Formato:" + articulo.formato
+    });
   }
 
   searchGeneral(){

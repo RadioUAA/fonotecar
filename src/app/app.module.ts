@@ -11,6 +11,8 @@ import { AuthGuard } from './auth.guard';
 import { AuthserviceService } from './services/authservice.service';
 import { BdCrudComponent } from './pages/bd-crud/bd-crud.component';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,8 @@ import { BdCrudComponent } from './pages/bd-crud/bd-crud.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthGuard,
