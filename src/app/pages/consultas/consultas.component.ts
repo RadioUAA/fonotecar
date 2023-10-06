@@ -31,15 +31,31 @@ export class ConsultasComponent {
 
   constructor (public router: Router, public articuloService: ArticuloService){
     this.inputArticulo = new Articulo();
-    setInterval(() =>{
-      this.a++;
-      console.log("Hola")
-    }, 3000);
     
+  }
+
+  actualizarValor(valor: number) {
+    this.a = valor;
   }
 
   ngOnInit(){  
     this.getArticulos();
+    const boton1 = document.getElementById("boton1") as HTMLButtonElement;
+    const boton2 = document.getElementById("boton2") as HTMLButtonElement;
+    const boton3 = document.getElementById("boton3") as HTMLButtonElement;
+
+    // Agregar manejadores de clic a los botones
+    boton1.addEventListener("click", () => {
+      this.actualizarValor(5);
+    });
+
+    boton2.addEventListener("click", () => {
+      this.actualizarValor(10);
+    });
+
+    boton3.addEventListener("click", () => {
+      this.actualizarValor(15);
+    });
   }
 
   //Muestra TODOS los articulos en la tabla
